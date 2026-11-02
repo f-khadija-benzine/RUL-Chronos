@@ -1,0 +1,101 @@
+{
+ "train_units": 100,
+ "test_units": 100,
+ "train_cycles": 20631,
+ "test_cycles": 13096,
+ "raw_variables": 24,
+ "train_traj_min_mean_max": [
+  128,
+  206.3,
+  362
+ ],
+ "test_traj_min_mean_max": [
+  31,
+  131.0,
+  303
+ ],
+ "test_units_shorter_than_W": 0,
+ "versions": {
+  "xgboost": "3.4.1",
+  "sklearn": "1.6.1",
+  "torch": "2.11.0+cu130",
+  "chronos-forecasting": "2.3.2"
+ },
+ "n_after_variance": 17,
+ "removed_variance": [
+  "sensor_1",
+  "sensor_5",
+  "sensor_10",
+  "sensor_16",
+  "sensor_18",
+  "sensor_19",
+  "setting_3"
+ ],
+ "n_correlation": 16,
+ "removed_correlation": [
+  "sensor_14"
+ ],
+ "n_aficv": 8,
+ "aficv_features": [
+  "sensor_11",
+  "sensor_4",
+  "sensor_9",
+  "sensor_12",
+  "sensor_7",
+  "sensor_15",
+  "sensor_14",
+  "sensor_17"
+ ],
+ "aficv_coverage": 0.904504120349884,
+ "train_windows": 17731,
+ "test_windows": 10196,
+ "chronos2_params_M": 119.5
+}
+                       Config  Dim         RMSE  RMSE_min  RMSE_max         Score
+             BASE|XGBoost-raw  480 13.63 ± 0.00 13.630010 13.630010   339.3 ± 0.0
+                  BASE|LSTMv2    0 13.93 ± 0.90 13.097963 15.369949 378.6 ± 100.0
+      C2|correlation|mean|MLP  768 14.61 ± 0.17 14.394652 14.844175  357.9 ± 30.4
+    C2|correlation|concat|MLP 3072 15.07 ± 0.23 14.760840 15.308334  379.5 ± 45.0
+    C2|correlation|last|Ridge  768 15.20 ± 0.00 15.204682 15.204682   349.8 ± 0.0
+      C2|correlation|last|MLP  768 15.21 ± 0.23 14.944327 15.498180  413.7 ± 34.9
+  C2|correlation|concat|Ridge 3072 15.49 ± 0.00 15.485760 15.485760   365.1 ± 0.0
+    C2|correlation|mean|Ridge  768 15.68 ± 0.00 15.682927 15.682927   387.9 ± 0.0
+    C1|correlation|mean|Ridge 8192 15.68 ± 0.00 15.683812 15.683812   361.0 ± 0.0
+C2|correlation|concat|XGBoost 3072 15.87 ± 0.00 15.871119 15.871119   476.0 ± 0.0
+  C2|correlation|mean|XGBoost  768 16.97 ± 0.00 16.969842 16.969842   702.0 ± 0.0
+  C2|correlation|last|XGBoost  768 17.11 ± 0.00 17.109386 17.109386   534.7 ± 0.0
+  C1|correlation|mean|XGBoost 8192 17.52 ± 0.00 17.519047 17.519047   563.9 ± 0.0
+      C1|correlation|mean|MLP 8192 18.19 ± 0.32 17.925196 18.747985  685.5 ± 12.1
+          C2|aficv|last|Ridge  768 18.49 ± 0.00 18.493420 18.493420   661.6 ± 0.0
+          C2|aficv|concat|MLP 3072 18.59 ± 0.36 18.050161 18.942170 877.3 ± 132.7
+          C2|aficv|mean|Ridge  768 19.03 ± 0.00 19.031798 19.031798   772.4 ± 0.0
+            C2|aficv|mean|MLP  768 19.16 ± 0.48 18.586965 19.631260 939.0 ± 128.6
+        C2|aficv|concat|Ridge 3072 19.39 ± 0.00 19.391816 19.391816   741.3 ± 0.0
+            C2|aficv|last|MLP  768 19.40 ± 0.26 18.980592 19.630772 984.5 ± 157.6
+      C2|aficv|concat|XGBoost 3072 20.33 ± 0.00 20.328428 20.328428  1567.8 ± 0.0
+        C2|aficv|mean|XGBoost  768 20.36 ± 0.00 20.364463 20.364463  1208.2 ± 0.0
+        C2|aficv|last|XGBoost  768 21.19 ± 0.00 21.193648 21.193648  1996.5 ± 0.0
+                       Config  RMSE_ensemble  CI95_lo  CI95_hi  dRMSE_vs_best  dCI_lo  dCI_hi  wilcoxon_p
+             BASE|XGBoost-raw      13.630000   11.365   15.880         -0.864  -3.898   2.265       0.264
+                  BASE|LSTMv2      13.525000   11.214   15.771         -0.969  -3.632   1.634       0.115
+      C2|correlation|mean|MLP      14.494000   12.472   16.467          0.000   0.000   0.000         NaN
+    C2|correlation|concat|MLP      14.803000   12.765   16.704          0.309  -0.854   1.449       0.195
+    C2|correlation|last|Ridge      15.205000   13.375   17.000          0.711  -0.565   2.033       0.156
+      C2|correlation|last|MLP      15.110000   13.055   17.099          0.616  -0.506   1.563       0.111
+  C2|correlation|concat|Ridge      15.486000   13.448   17.356          0.992  -0.277   2.276       0.144
+    C2|correlation|mean|Ridge      15.683000   13.742   17.532          1.189   0.193   2.230       0.040
+    C1|correlation|mean|Ridge      15.684000   13.824   17.436          1.190  -1.535   3.858       0.128
+C2|correlation|concat|XGBoost      15.871000   13.575   18.158          1.377  -0.220   3.091       0.554
+  C2|correlation|mean|XGBoost      16.969999   14.174   19.745          2.476   0.253   4.589       0.655
+  C2|correlation|last|XGBoost      17.108999   14.809   19.382          2.616   0.663   4.627       0.183
+  C1|correlation|mean|XGBoost      17.518999   15.161   19.718          3.025   0.418   5.605       0.117
+      C1|correlation|mean|MLP      17.940001   14.982   20.654          3.446   0.098   6.907       0.552
+          C2|aficv|last|Ridge      18.493000   16.017   20.797          4.000   2.051   5.823       0.004
+          C2|aficv|concat|MLP      18.364000   15.659   20.956          3.871   1.806   5.869       0.011
+          C2|aficv|mean|Ridge      19.032000   16.374   21.613          4.538   2.590   6.406       0.000
+            C2|aficv|mean|MLP      19.014999   15.983   21.747          4.521   2.444   6.417       0.007
+        C2|aficv|concat|Ridge      19.392000   16.788   21.904          4.898   2.926   6.827       0.001
+            C2|aficv|last|MLP      19.235001   16.437   21.874          4.741   2.307   6.930       0.010
+      C2|aficv|concat|XGBoost      20.327999   16.660   23.728          5.835   2.870   8.819       0.033
+        C2|aficv|mean|XGBoost      20.364000   16.992   23.481          5.871   3.355   8.194       0.002
+        C2|aficv|last|XGBoost      21.194000   17.899   24.690          6.700   3.837   9.596       0.001
